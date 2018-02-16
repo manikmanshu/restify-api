@@ -1,0 +1,16 @@
+{
+  "name": "user-restify",
+  "version": "1.0.0",
+  "description": "Rest API in restify js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manish Motiani",
+  "license": "ISC",
+  "dependencies": {
+    "restify": "^6.3.4",
+    "winston": "^2.4.0"
+  }
+}
