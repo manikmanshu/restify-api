@@ -10,6 +10,7 @@
   "author": "Manish Motiani",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "mongodb": "^3.0.2",
     "mongoose": "^5.0.6",
     "restify": "^6.3.4",
