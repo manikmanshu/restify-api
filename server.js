@@ -1,6 +1,7 @@
 const restify = require('restify');
-const logger =  require('./logger/logs');
+const logger = require('./logger/logs');
 
+var app = require('./app');
 const port = process.env.PORT || 8000;
 
 const server = restify.createServer({
@@ -12,11 +13,7 @@ server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 
-server.get('/echo/:name', function (req, res, next) {
-  res.send(req.params);
-  return next();
-});
-
 server.listen(port, function () {
+  app(server);
   logger.info(`${server.name} listening at ${server.url}`);
 });
