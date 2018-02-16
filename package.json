@@ -10,6 +10,8 @@
   "author": "Manish Motiani",
   "license": "ISC",
   "dependencies": {
+    "mongodb": "^3.0.2",
+    "mongoose": "^5.0.6",
     "restify": "^6.3.4",
     "winston": "^2.4.0"
   }
