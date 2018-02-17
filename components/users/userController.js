@@ -1,4 +1,5 @@
-var { userAPI } = require('./userAPI');
+const { userAPI } = require('./userAPI');
+const logger = require('./logger/logs');
 
 function createUser(req, res, next) {
     var user = {
@@ -10,11 +11,14 @@ function createUser(req, res, next) {
         phone: req.body.phone,
     };
 
+    logger.info('Creating new user');
     userAPI.createUser(user, (err, data) => {
         if (err) {
+            logger.error(`failed to create new user ${err.error}`);
             res.send(err.status, err.error);
         }
         else {
+            logger.info('New user is created');
             res.send(data);
         }
         next();
@@ -24,11 +28,14 @@ function createUser(req, res, next) {
 function updateUser(req, res, next) {
     var id = req.params.id;
     var body = req.body;
+    logger.info('Updating user');
     userAPI.updateUser(id, body, (err, data) => {
         if (err) {
+            logger.error(`failed to update user ${err.error}`);
             res.send(err.status, err.error);
         }
         else {
+            logger.info('user is updated');
             res.send(data);
         }
         next();
@@ -37,11 +44,14 @@ function updateUser(req, res, next) {
 
 function getUser(req, res, next) {
     var id = req.params.id;
+    logger.info(`Get user id: ${id}`);
     userAPI.getUser(id, (err, data) => {
         if (err) {
+            logger.error(`failed to fetch user ${id}`);
             res.send(err.status, err.error);
         }
         else {
+            logger.info('user fetch completed sucessfully');
             res.send(data);
         }
         next(err);
@@ -50,11 +60,14 @@ function getUser(req, res, next) {
 }
 
 function getUsers(req, res, next) {
+    logger.info('Get all users');
     userAPI.getUsers((err, data) => {
         if (err) {
+            logger.error(`fetch users failed ${err.error}`);
             res.send(err.status, err.error);
         }
         else {
+            logger.info('user fetch completed');
             res.send(data);
         }
         next();
@@ -69,6 +82,7 @@ function getPagedUsers(req, res, next) {
 
     userAPI.getPagedUsers(skip, limit, (err, data) => {
         if (err) {
+            logger.error(`failed to get paged data: ${err.error}`);
             res.send(err.status, err.error);
         }
         else {
@@ -80,11 +94,14 @@ function getPagedUsers(req, res, next) {
 
 function deleteUser(req, res, next) {
     var id = req.params.id;
+    logger.info(`Delete user ${id}`);
     userAPI.deleteUser(id, (err, data) => {
         if (err) {
+            logger.error(`failed to delete user. id: ${id}, ${err.error}`);
             res.send(err.status, err.error);
         }
         else {
+            logger.info(`user ${id} delete sucessfully`);
             res.send(data);
         }
         next();
