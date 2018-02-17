@@ -1,5 +1,5 @@
 const { userAPI } = require('./userAPI');
-const logger = require('./logger/logs');
+const logger = require('./../../logger/logs');
 
 function createUser(req, res, next) {
     var user = {
