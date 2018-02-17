@@ -1,6 +1,12 @@
 const { userAPI } = require('./userAPI');
 const logger = require('./../../logger/logs');
 
+/**
+ * create a new user
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 function createUser(req, res, next) {
     var user = {
         name: req.body.name,
@@ -25,6 +31,12 @@ function createUser(req, res, next) {
     });
 }
 
+/**
+ * Update a user
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 function updateUser(req, res, next) {
     var id = req.params.id;
     var body = req.body;
@@ -42,6 +54,12 @@ function updateUser(req, res, next) {
     });
 }
 
+/**
+ * Fetch a User
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 function getUser(req, res, next) {
     var id = req.params.id;
     logger.info(`Get user id: ${id}`);
@@ -59,6 +77,12 @@ function getUser(req, res, next) {
     });
 }
 
+/**
+ * Get all users
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 function getUsers(req, res, next) {
     logger.info('Get all users');
     userAPI.getUsers((err, data) => {
@@ -74,6 +98,12 @@ function getUsers(req, res, next) {
     });
 }
 
+/**
+ * Get users with pagination
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 function getPagedUsers(req, res, next) {
     var skipVal = parseInt(req.params.page, 10),
         limitVal = parseInt(req.params.pageSize, 10),
@@ -92,6 +122,12 @@ function getPagedUsers(req, res, next) {
     });
 }
 
+/**
+ * Delete a user
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 function deleteUser(req, res, next) {
     var id = req.params.id;
     logger.info(`Delete user ${id}`);

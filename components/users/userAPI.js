@@ -2,6 +2,11 @@ const { User } = require('./userModel');
 const { ObjectID } = require('mongodb');
 
 
+/**
+ * Create new user
+ * @param {user} userModel 
+ * @param {*} callback err first callback
+ */
 function createUser(userModel, callback) {
     var newUser = new User(userModel);
     newUser.password = newUser.generateHash(userModel.password);
@@ -14,6 +19,12 @@ function createUser(userModel, callback) {
     });
 }
 
+/**
+ * Update existing user
+ * @param {string} id 
+ * @param {user} body 
+ * @param {*} callback err first callback
+ */
 function updateUser(id, body, callback) {
     if (!ObjectID.isValid(id)) {
         return callback({ status: 404 });
@@ -34,6 +45,11 @@ function updateUser(id, body, callback) {
         });
 }
 
+/**
+ * Fetch a user
+ * @param {string} id 
+ * @param {*} callback err first callback
+ */
 function getUser(id, callback) {
     if (!ObjectID.isValid(id)) {
         return callback({ status: 404 });
@@ -49,6 +65,10 @@ function getUser(id, callback) {
         });
 }
 
+/**
+ * Get all users
+ * @param {*} callback error first callback
+ */
 function getUsers(callback) {
     User.find()
         .then((users) => {
@@ -61,6 +81,13 @@ function getUsers(callback) {
         });
 }
 
+/**
+ * 
+ * @param {Number} skip document to skip
+ * @param {Number} limit page size
+ * @param {*} callback error first callback
+ * Fetch User with size limit
+ */
 function getPagedUsers(skip, limit, callback) {
     User.count()
         .then((count) => {
@@ -76,6 +103,11 @@ function getPagedUsers(skip, limit, callback) {
         })
 }
 
+/**
+ * Delete a user 
+ * @param {string} id 
+ * @param {*} callback error first callback
+ */
 function deleteUser(id, callback) {
     if (!ObjectID.isValid(id)) {
         return callback({ status: 404 });
