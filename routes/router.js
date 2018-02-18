@@ -1,4 +1,4 @@
-var { userController } = require('./../components/users/userController');
+var { userController } = require('./../components/users');
 
 function initialize(server) {
     // User
